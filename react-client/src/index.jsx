@@ -35,7 +35,7 @@ class App extends React.Component {
 
     axios.post('/scrape', { input: input }).then(res => {
       if (!res.data) {
-        console.log('Error'); 
+        console.log('Error receiving data from the server'); 
       }
       console.log('Data received from Server: ', res.data); 
       this.setState({ searchResults: res.data });
