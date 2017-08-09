@@ -4,7 +4,6 @@ const request = require('request');
 const axios = require('axios'); 
 const Crawler = require('crawler');
 extractor = require('unfluff');
-//const cheerio = require('cheerio');
 
 var app = express();
 
@@ -12,10 +11,10 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
-app.post('/scrape', function (req, res) {
+app.post('/scrape', function (request, response) {
 
   //need to handle this for security
-  const url = req.body.input; 
+  const url = request.body.input; 
   let wordFrequencies = {}; 
 
   //getting the html data from the page
@@ -26,33 +25,39 @@ app.post('/scrape', function (req, res) {
         console.log(error); 
       } else {
         let $ = res.$; 
-        
-        //so this actually works but I'm not supposed to use it....
-        //let data = extractor(res.body, 'en');
-        //console.log('DATATATA', data); 
-
+      
         let spanWords = $('span').text().split(' '); 
         let h1Words = $('h1').text().split(' ');
         let h2Words = $('h2').text().split(' '); 
         let title = $('title').text().split(' '); 
         let p = $('p').text().split(' '); 
 
+        let freqPairs = []; 
+
         let countWordFrequencies = (words) => {
           for (let i = 0; i < words.length; i++) {
             let current = words[i]; 
 
-            if (current === ' ' || current.length <= 2 || current[0] === '$') {
+            current = current.trim().replace(/(\r\n\t|\n|\r|\t)/gm,"");
+
+            if (typeof current.split(/ /)[0].replace(/[^\d]/g, '') === 'number') {
               continue; 
             }
 
-            current = current.replace(/(\r\n|\n|\r)/gm,"");
+            //filtering out spaces, small words, prices, numbers
+            if (current === ' ' || current.length <= 2 || 
+              current[0] === '$' || current == parseInt(current)) {
+              continue; 
+            }
 
+            //adding to word frequencies hash
             if (!wordFrequencies[current]) {
               wordFrequencies[current] = 1; 
             } else {
               wordFrequencies[current]++; 
             }
 
+            //giving more weight to upper case words
             if (current[0]) {
               if (current[0] === current[0].toUpperCase()) {
                 wordFrequencies[current] += 3; 
@@ -61,16 +66,31 @@ app.post('/scrape', function (req, res) {
               continue; 
             }
           }
-        }
+        };
 
         countWordFrequencies(spanWords); 
         countWordFrequencies(h1Words);
         countWordFrequencies(h2Words); 
         countWordFrequencies(title);  
+        countWordFrequencies(p); 
 
-        console.log(wordFrequencies); 
+        let sortFrequencies = (wordFrequencies) => {  
+          for (let word in wordFrequencies) {
+            freqPairs.push({
+              word: word, 
+              freq: wordFrequencies[word]
+            }); 
+          }
 
-        //let words = data.split(' '); 
+          freqPairs = freqPairs.sort((a, b) => {
+            return (a.freq > b.freq) ? -1 : ((a.freq < b.freq) ? 1 : 0);
+          });
+
+          freqPairs.length = 30; 
+        };
+
+        sortFrequencies(wordFrequencies); 
+        response.send(freqPairs); 
       };
 
       done(); 
@@ -80,13 +100,5 @@ app.post('/scrape', function (req, res) {
   c.queue(url); 
 });
 
-  //gives a string value 
-  //error handling for making sure that it's a URL 
-  //once you're sure it's a URL, use the cheerio library to get the HTML from it
-  //THEN, use the unstuff library to get the words from it
-  //rank the words based on frequency and return the highest frequency words
-      //excluding the common words 
-
-  //res.send('get request is workingggg yaayy');
 
 module.exports = app; 
