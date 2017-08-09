@@ -33,39 +33,6 @@ const styles = {
     width: '50%',
     height: '100%'
   },
-
-  //fix
-
-  ratingBlock: {
-    height: '30px',
-    verticalAlign: 'middle',
-    margin: '0 0 10px 0',
-  },
-  reviewBlock: {
-    verticalAlign: 'middle',
-    margin: '0 0 10px 0',
-  },
-  imgResize: {
-    float: 'left',
-    margin: '0 2% 0 0',
-    maxWidth: '30%',
-    maxHeight: '30%',
-  },
-  CardHeader: {
-    fontSize: '200%',
-  },
-  logo: {
-    float: 'right',
-    maxWidth: '9%',
-    maxHeight: '9%',
-  },
-  cardStyle: {
-    display: 'table',
-    maxWidth: '33%',
-    margin: '-1% 2% 0 0',
-    float: 'right',
-    borderRadius: '12px'
-  },
   mainColor: '#808080',
   centeredImage: {
     position: 'fixed',
@@ -87,8 +54,6 @@ const styles = {
     left: '50%',
     marginTop: '-20px',
     marginLeft: '-48px'
-    // float: 'left',
-    // clear: 'left',
   }
 };
 

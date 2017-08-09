@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import axios from 'axios';
 import AppBar from 'material-ui/AppBar';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -14,7 +15,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      searchResults: []
     }
     this.search = this.search.bind(this); 
   }
@@ -28,47 +29,19 @@ class App extends React.Component {
         isLoading: false,
       });
     }, 700);
+    
     console.log('search: ', input);
-    // axios.get(`/search?query=${input}`)
-    // .then((response) => {
-    //   console.log('RES DATA API IS', response.data);
-    //   this.setState({
-    //     data: response.data,
-    //   }, () => this.setState({
-    //     lat: response.data.lat,
-    //     lng: response.data.lng,
-    //   }));
-    // })
-    // .then(
-    //   this.setState({
-    //     favView: false,
-    //     mainView: true,
-    //   }, this.setState({ mapView: true })),
-    // )
-    // // .then(this.setState({ isLoading: false }))
-    // .catch((error) => {
-    //   if (error) {
-    //     this.setState({
-    //       isLoading: false,
-    //     });
-    //   }
-    //   console.warn(error);
-    // });
-  }
+    //make sure input can't change the code, security fix
 
-
-  componentDidMount() {
-    // $.ajax({
-    //   url: '/items', 
-    //   success: (data) => {
-    //     this.setState({
-    //       items: data
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });
+    axios.post('/scrape', { input: input }).then(res => {
+      if (!res.data) {
+        console.log('Error'); 
+      }
+      console.log('Data received from Server: ', res.data); 
+      this.setState({ searchResults: res.data });
+    });
+   
+    //send input data to back end 
   }
 
   render () {

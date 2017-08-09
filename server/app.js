@@ -1,22 +1,30 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-// UNCOMMENT THE DATABASE YOU'D LIKE TO USE
-// var items = require('../database-mysql');
-// var items = require('../database-mongo');
+const express = require('express');
+const bodyParser = require('body-parser');
+const request = require('request'); 
+const axios = require('axios'); 
+const cheerio = require('cheerio');
 
 var app = express();
 
-// UNCOMMENT FOR REACT
 app.use(express.static(__dirname + '/../react-client/dist'));
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
-    if(err) {
-      res.sendStatus(500);
-    } else {
-      res.json(data);
-    }
-  });
+app.post('/scrape', function (req, res) {
+	//get the input data from the client 
+
+	console.log('REQUESTTTT', req.body.input);
+	//gives a string value 
+	//error handling for making sure that it's a URL 
+	//once you're sure it's a URL, use the cheerio library to get the HTML from it
+	//THEN, use the unstuff library to get the words from it
+	//rank the words based on frequency and return the highest frequency words
+		//excluding the common words 
+	res.send('get request is workingggg yaayy');
+  
+
+
+
 });
 
 module.exports = app; 
