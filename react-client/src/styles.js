@@ -9,7 +9,7 @@ const styles = {
   title: {
     fontFamily: 'Arial, Verdana, Sans-serif',
     color: '#808080',
-    fontSize: '500%',
+    fontSize: '550%',
     position: 'fixed',
     top: '50%',
     left: '50%',
@@ -34,7 +34,7 @@ const styles = {
     height: '100%'
   },
 
-
+  //fix
 
   ratingBlock: {
     height: '30px',
