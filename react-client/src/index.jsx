@@ -74,11 +74,15 @@ class App extends React.Component {
   render () {
     return (
       <MuiThemeProvider>
-        <div>
+        <div style={ styles.background }>
+
+          <div style={ styles.background2 }>
+          <h1 style={ styles.title }>URL Summary</h1>
           <SearchBar
             onSearch={ this.search }
             style={ styles.main }
           />
+          </div>
         </div>
       </MuiThemeProvider>
     )

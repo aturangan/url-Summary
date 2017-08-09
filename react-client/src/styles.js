@@ -6,6 +6,35 @@ const styles = {
     marginTop: '-100px',
     marginLeft: '-120px'
   },
+  title: {
+    fontFamily: 'Arial, Verdana, Sans-serif',
+    color: '#808080',
+    fontSize: '500%',
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    marginTop: '-300px',
+    marginLeft: '-270px',
+  },
+  background: {
+    backgroundColor: '#C2F1F3',
+    position: 'absolute',
+    top: '0px',
+    left: '0px',
+    width: '100%',
+    height: '100%',
+    zIndex: '-1',
+  },
+  background2: {
+    backgroundColor: 'white',
+    position: 'absolute',
+    top: '0',
+    left: '50%',
+    width: '50%',
+    height: '100%'
+  },
+
+
 
   ratingBlock: {
     height: '30px',
@@ -37,7 +66,7 @@ const styles = {
     float: 'right',
     borderRadius: '12px'
   },
-  mainColor: '#FFA726',
+  mainColor: '#808080',
   centeredImage: {
     position: 'fixed',
     top: '50%',
@@ -51,56 +80,16 @@ const styles = {
     justifyContent: 'space-around',
     marginTop: '20px',
   },
-  gridList: {
-    width: '500px',
-    height: '450px',
-    overflowY: 'auto',
-    float: 'left',
-    marginRight: '20px',
-  },
-  List: {
-    display: 'table',
-    margin: '0 auto 0 20px',
-    marginTop: '20px',
-    float: 'left',
-  },
   searchButton: {
     display: 'table',
-    width: '50px',
-    position: 'absolute',
-    top: '0',
-    bottom: '0', 
-    left: '0',
-    right: '0',
-    margin: 'auto',
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    marginTop: '-20px',
+    marginLeft: '-48px'
     // float: 'left',
     // clear: 'left',
-  },
-  helpCommands: {
-    borderStyle: 'solid',
-    borderColor: '#FFA726',
-    position: 'fixed',
-    top: '20%',
-    left: '50%',
-    padding: '0 20px',
-    marginTop: '-50px',
-    marginLeft: '-150px',
-  },
-  gmap: {
-    position: 'absolute',
-    top: '0px',
-    left: '0px',
-    width: '100%',
-    height: '100%',
-    zIndex: '-1',
-  },
-  marker: {
-    position: 'absolute',
-    width: '40px',
-    height: '40px',
-    left: '-20px',
-    top: '-20px',
-  },
+  }
 };
 
 export default styles;
