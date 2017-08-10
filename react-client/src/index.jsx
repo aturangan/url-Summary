@@ -31,34 +31,32 @@ class App extends React.Component {
       });
     }, 700);
     
-    console.log('search: ', input);
-    //make sure input can't change the code, security fix
+    input = input.toString();  
+    let www = input.slice(0, 5); 
+    
+    if (www === 'www.') {
+      input = 'http://' + input; 
+    }
 
     axios.post('/scrape', { input: input }).then(res => {
       if (!res.data) {
         console.log('Error receiving data from the server'); 
+      } else {
+        console.log('Data received from Server: ', res.data); 
+        this.setState({ searchResults: res.data });
       }
-      console.log('Data received from Server: ', res.data); 
-      this.setState({ searchResults: res.data });
     });
-   
-    //send input data to back end 
   }
 
   render () {
     return (
       <MuiThemeProvider>
         <div style={ styles.background }>
-
           <div style={ styles.background2 }>
-          <h1 style={ styles.title }>URL Summary</h1>
-          <SearchBar
-            onSearch={ this.search }
-            style={ styles.main }
-          />
-          <ListItem
-            searchResults={ this.state.searchResults }
-          />
+            <h1 style={ styles.title }>URL Summary</h1>
+            <h3 style={ styles.h3 }>Just Enter a URL and See the Site Summary on the Right!</h3>
+            <SearchBar onSearch={ this.search } style={ styles.main }/>
+            <ListItem searchResults={ this.state.searchResults }/>
           </div>
         </div>
       </MuiThemeProvider>

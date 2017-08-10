@@ -1,0 +1,33 @@
+Hello!
+
+I built this small application with React, Express, and Node, and the library I used
+for HTML parsing is crawler. 
+
+1. server/app.js 
+	
+	This is where I put the main functionality and took the data I needed from the websites. 
+	I used the web crawler to parse the HTML and extract the text from the HTML tags that I thought would be relevant. To get plain words, I filtered for the following:
+
+	-Error
+	-Common words ('the', 'and', etc)
+	-Symbols
+	-Newlines
+	-Capitalization
+	-Spacing
+	-Numbers
+	-Length
+
+	As I was iterating through the words in the web page, I stored the results in a hash table to keep track of the frequencies of the words. 
+	I put all these results into an array so I could sort the words from highest to lowest frequency, and then I sent the data back to the client. 
+
+2. index.jsx
+	
+	This is the top level file that holds my React states. I handle the input data and convert it to a string to prevent XSS, also testing for 'www' syntax.
+
+	I then send an Axios post request to the server after a URL is entered. The index.jsx file compiles my child components into the main render view. 
+
+
+3. SearchBar.jsx/ListItem.jsx
+	
+	These are the child components. SearchBar.jsx handles input state changes when a user types in a URL. ListItem.jsx then maps out the results after the post request is sent from index.jsx and the state of the 'searchResults' array is updated. 
+

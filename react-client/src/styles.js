@@ -4,7 +4,7 @@ const styles = {
     top: '50%',
     left: '50%',
     marginTop: '-100px',
-    marginLeft: '-120px'
+    marginLeft: '-480px'
   },
   title: {
     fontFamily: 'Arial, Verdana, Sans-serif',
@@ -13,6 +13,16 @@ const styles = {
     position: 'fixed',
     top: '50%',
     left: '50%',
+    marginTop: '-300px',
+    marginLeft: '-270px',
+  },
+  h3: {
+    fontFamily: 'Arial, Verdana, Sans-serif',
+    color: '#808080',
+    fontSize: '200%',
+    position: 'fixed',
+    top: '65%',
+    left: '40%',
     marginTop: '-300px',
     marginLeft: '-270px',
   },
@@ -34,26 +44,23 @@ const styles = {
     height: '100%'
   },
   mainColor: '#808080',
-  centeredImage: {
+  ul: {
+    fontSize: '150%',
+    fontFamily: 'Arial, Verdana, Sans-serif',
+    listStyle: 'none',
     position: 'fixed',
-    top: '50%',
-    left: '50%',
-    marginTop: '-50px',
-    marginLeft: '-150px',
-  },
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    marginTop: '20px',
-  },
+    top: '30%',
+    left: '68%',
+    marginTop: '-20px',
+    marginLeft: '-100px'
+  },  
   searchButton: {
     display: 'table',
     position: 'fixed',
     top: '50%',
     left: '50%',
     marginTop: '-20px',
-    marginLeft: '-48px'
+    marginLeft: '-405px'
   }
 };
 

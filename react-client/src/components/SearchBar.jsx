@@ -26,7 +26,7 @@ class SearchBar extends React.Component {
       <div>
         <SearchInput
           style={ styles.main }
-          hintText="Type Something!"
+          hintText="http://www.amazon.com"
           dataSource={ blank }
           searchText={ this.state.input }
           onUpdateInput={ this.onUpdateInput }
@@ -36,7 +36,7 @@ class SearchBar extends React.Component {
           label="Search" 
           backgroundColor={ styles.mainColor }
           labelColor="rgb(255, 255, 255)"
-          onClick={ () => this.props.onSearch(this.state.input) }
+          onTouchTap={ () => this.props.onSearch(this.state.input) }
         />
       </div>
     );
