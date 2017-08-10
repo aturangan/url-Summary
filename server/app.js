@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const request = require('request'); 
 const axios = require('axios'); 
 const Crawler = require('crawler');
-extractor = require('unfluff');
 
 var app = express();
 
@@ -26,6 +25,7 @@ app.post('/scrape', function (request, response) {
       } else {
         let $ = res.$; 
       
+        //taking the text that I think is most likely important
         let spanWords = $('span').text().split(' '); 
         let h1Words = $('h1').text().split(' ');
         let h2Words = $('h2').text().split(' '); 
@@ -86,7 +86,10 @@ app.post('/scrape', function (request, response) {
             return (a.freq > b.freq) ? -1 : ((a.freq < b.freq) ? 1 : 0);
           });
 
-          freqPairs.length = 30; 
+          //I don't want more than 30 results sent back to the client
+          if (freqPairs.length > 30) {
+            freqPairs.length = 30; 
+          }
         };
 
         sortFrequencies(wordFrequencies); 

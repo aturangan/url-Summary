@@ -7,6 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import SearchBar from './components/SearchBar.jsx';
+import ListItem from './components/ListItem.jsx'; 
 import styles from './styles.js'; 
 
 injectTapEventPlugin();
@@ -54,6 +55,9 @@ class App extends React.Component {
           <SearchBar
             onSearch={ this.search }
             style={ styles.main }
+          />
+          <ListItem
+            searchResults={ this.state.searchResults }
           />
           </div>
         </div>
